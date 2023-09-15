@@ -2,6 +2,7 @@ package com.trybe.consultafilmes;
 
 import static java.util.Collections.emptyList;
 import static java.util.Collections.emptyMap;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -60,7 +61,21 @@ public class Consultas {
    * </p>
    */
   public List<String> atoresQueAtuaramEmFilmesDoDiretorEmOrdemAlfabetica(String diretor) {
-    return emptyList(); // TODO: Implementar.
+    List<String> atoresQueAturamComDiretor = new ArrayList<>();
+
+    for (Filme filme : filmes) {
+      Set<String> diretores = filme.diretores;
+      Set<String> atores = filme.atores;
+      for (String diretorFilme : diretores) {
+        if (diretor == diretorFilme) {
+          atoresQueAturamComDiretor.addAll(atores);
+        }
+      }
+    }
+    List<String> listaAtoresFiltrada =
+        atoresQueAturamComDiretor.stream().distinct().sorted().collect(Collectors.toList());
+
+    return listaAtoresFiltrada;
   }
 
   /**
