@@ -1,6 +1,5 @@
 package com.trybe.consultafilmes;
 
-import static java.util.Collections.emptyList;
 import static java.util.Collections.emptyMap;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -89,7 +88,21 @@ public class Consultas {
    * </p>
    */
   public List<Filme> filmesEmQuePeloMenosUmDiretorAtuouMaisRecentesPrimeiro() {
-    return emptyList(); // TODO: Implementar.
+    Set<Filme> filmesQueDiretoresQueAtuaramProprioFilme = new HashSet<>();
+    for (Filme filme : filmes) {
+      Set<String> diretores = filme.diretores;
+      Set<String> atores = filme.atores;
+      for (String diretor : diretores) {
+        if (atores.contains(diretor)) {
+          filmesQueDiretoresQueAtuaramProprioFilme.add(filme);
+        }
+      }
+    }
+    List<Filme> filmesOrdenados = filmesQueDiretoresQueAtuaramProprioFilme.stream()
+        .sorted((filme1, filme2) -> Integer.compare(filme2.anoDeLancamento, filme1.anoDeLancamento))
+        .collect(Collectors.toList());
+
+    return filmesOrdenados;
   }
 
   /**

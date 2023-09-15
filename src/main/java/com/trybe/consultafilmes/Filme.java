@@ -23,16 +23,11 @@ public class Filme {
    * @param anoDeLancamento Ano de lançamento do filme.
    * @param categorias Conjunto de categorias a que pertence o filme (ação, comédia, drama, etc).
    * @param diretores Conjunto de diretores do filme.
-   * @param atoresPorPersonagem Mapa que associa o nome de cada personagem do filme ao conjunto
-   *                            de atores que o interpretaram.
+   * @param atoresPorPersonagem Mapa que associa o nome de cada personagem do filme ao conjunto de
+   *        atores que o interpretaram.
    */
-  public Filme(
-      String titulo,
-      int anoDeLancamento,
-      Collection<String> categorias,
-      Collection<String> diretores,
-      Map<String, Set<String>> atoresPorPersonagem
-  ) {
+  public Filme(String titulo, int anoDeLancamento, Collection<String> categorias,
+      Collection<String> diretores, Map<String, Set<String>> atoresPorPersonagem) {
     this.titulo = titulo;
     this.anoDeLancamento = anoDeLancamento;
     this.categorias = Set.copyOf(categorias);
@@ -40,8 +35,7 @@ public class Filme {
     this.atoresPorPersonagem = Collections.unmodifiableMap(atoresPorPersonagem);
 
     this.personagens = Collections.unmodifiableSet(atoresPorPersonagem.keySet());
-    this.atores = atoresPorPersonagem.values().stream()
-        .flatMap(Collection::stream)
+    this.atores = atoresPorPersonagem.values().stream().flatMap(Collection::stream)
         .collect(Collectors.toUnmodifiableSet());
   }
 
