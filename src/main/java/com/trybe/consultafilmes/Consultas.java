@@ -1,8 +1,8 @@
 package com.trybe.consultafilmes;
 
-import static java.util.Collections.emptyMap;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -115,6 +115,17 @@ public class Consultas {
    * </p>
    */
   public Map<String, Set<Filme>> filmesLancadosNoAnoAgrupadosPorCategoria(int ano) {
-    return emptyMap(); // TODO: Implementar (bônus).
+    Map<String, Set<Filme>> filmesPorCategoria = new HashMap<>();
+    for (Filme filme : filmes) {
+      if (filme.anoDeLancamento == ano) {
+        for (String categoria : filme.categorias) {
+          filmesPorCategoria.putIfAbsent(categoria, new HashSet<>());
+
+          filmesPorCategoria.get(categoria).add(filme);
+        }
+      }
+    }
+    return filmesPorCategoria;
   }
+
 }
